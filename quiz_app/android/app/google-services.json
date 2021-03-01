@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "20936687451",
+    "project_id": "jamb-quiz-app",
+    "storage_bucket": "jamb-quiz-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20936687451:android:4bb7d2d430631755dd247e",
+        "android_client_info": {
+          "package_name": "com.wisdom.quiz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20936687451-8tchg4e764h0f6lg7nrf91ddh86q8vtt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCueth1bNQDoo4Wz8JNyik0HOF97XVNvRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20936687451-8tchg4e764h0f6lg7nrf91ddh86q8vtt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
