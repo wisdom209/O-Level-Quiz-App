@@ -21,8 +21,9 @@ class TextFieldItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       child: TextFormField(
+          autofocus: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          obscureText: hintText=="Password"?true: false,
+          obscureText: hintText == "Password" ? true : false,
           validator: (value) {
             if (loginScreen == true || loginScreen != null) {
               return null;
@@ -46,7 +47,15 @@ class TextFieldItem extends StatelessWidget {
                   return "Name should be 3 characters or more";
                 }
                 return null;
-              } else {
+              }
+              else if (content == "hiveUserName" && value != "") {
+                if (!GetUtils.isLengthGreaterThan(value, 2) || GetUtils.isLengthGreaterThan(value,10)) {
+                  _questionControllerInstance.hiveUserName.value = "";
+                  return "Name should be 3 characters or more";
+                }
+                return null;
+              }
+               else {
                 return null;
               }
             }
@@ -56,6 +65,8 @@ class TextFieldItem extends StatelessWidget {
               _questionControllerInstance.userName.value = text;
             } else if (content == "email") {
               _questionControllerInstance.emailName.value = text;
+            } else if (content == "hiveUserName") {
+              _questionControllerInstance.hiveUserName.value = text;
             } else {
               _questionControllerInstance.passwordName.value = text;
             }

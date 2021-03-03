@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:quiz_app/Backend/AuthService.dart';
-import 'package:quiz_app/Constants/AppConstants.dart';
-import 'package:quiz_app/GetController/QuestionController.dart';
 
 import '../Components/DashboardItem.dart';
+import '../Constants/AppConstants.dart';
+import '../GetController/QuestionController.dart';
 import 'ProgressScreen.dart';
-import 'LoginScreen.dart';
+import 'SelectUser.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key key}) : super(key: key);
@@ -17,14 +16,15 @@ class Dashboard extends StatelessWidget {
     QuestionController _questionControllerInstance = Get.find();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    
 
     return Scaffold(
         appBar: AppBar(
-          title: _questionControllerInstance.isGuest.value
-              ? Text("Guest")
-              : Obx(()=>Text(_questionControllerInstance.displayName.value)),
-          leading: Icon(Icons.home, color: Colors.white,),
+          title: Obx(() => Text(
+              _questionControllerInstance.hiveUserName.value.capitalizeFirst)),
+          leading: Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
           actions: [
             PopupMenuButton(
               padding: EdgeInsets.zero,
@@ -35,14 +35,7 @@ class Dashboard extends StatelessWidget {
                       transition: Transition.leftToRightWithFade);
                 }
                 if (value == 2) {
-                  if (!_questionControllerInstance.isGuest.value) {
-                    AuthService().signOut();
-                    Get.offAll(LoginScreen(),
-                        transition: Transition.leftToRightWithFade);
-                  } else {
-                    Get.off(LoginScreen(),
-                        transition: Transition.leftToRightWithFade);
-                  }
+                  Get.offAll(SelectUser());
                 }
               },
               itemBuilder: (context) => [
@@ -50,25 +43,19 @@ class Dashboard extends StatelessWidget {
                   child: Text("Progress"),
                   value: 1,
                 ),
-                _questionControllerInstance.isGuest.value
-                    ? PopupMenuItem(
-                        child: Text("Sign In"),
-                        value: 2,
-                      )
-                    : PopupMenuItem(
-                        child: Text("Logout"),
-                        value: 2,
-                      ),
+                PopupMenuItem(
+                  child: Text("Select User"),
+                  value: 2,
+                )
               ],
             ),
           ],
         ),
         body: Container(
-          decoration:BoxDecoration(color: AppConstants().primaryColour),
+          decoration: BoxDecoration(color: AppConstants().primaryColour),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8.0),
             child: Center(
-                
                 child: ListView(
               children: [
                 Row(
@@ -121,7 +108,6 @@ class Dashboard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                  
                     DashboardItem(
                       width: width,
                       height: height,

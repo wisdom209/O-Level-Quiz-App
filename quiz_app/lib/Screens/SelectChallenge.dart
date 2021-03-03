@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:quiz_app/Backend/AuthService.dart';
-import 'package:quiz_app/GetController/QuestionController.dart';
-import 'package:quiz_app/Screens/Dashboard.dart';
-import 'package:quiz_app/Screens/Questions.dart';
-import 'package:quiz_app/Screens/SelectYear.dart';
+
 import '../Components/SelectChallengeBtn.dart';
 import '../Constants/AppConstants.dart';
+import '../GetController/QuestionController.dart';
+import 'Dashboard.dart';
 import 'ProgressScreen.dart';
-import 'LoginScreen.dart';
+import 'Questions.dart';
+import 'SelectUser.dart';
+import 'SelectYear.dart';
 
 class SelectChallenge extends StatelessWidget {
   const SelectChallenge({Key key}) : super(key: key);
@@ -19,7 +19,8 @@ class SelectChallenge extends StatelessWidget {
     QuestionController _questionControllerInstance = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: Text(_questionControllerInstance.subjectedSelected.value.capitalize),
+        title: Text(
+            _questionControllerInstance.subjectedSelected.value.capitalize),
         actions: [
           PopupMenuButton(
             padding: EdgeInsets.zero,
@@ -30,14 +31,7 @@ class SelectChallenge extends StatelessWidget {
                     transition: Transition.leftToRightWithFade);
               }
               if (value == 3) {
-                if (!_questionControllerInstance.isGuest.value) {
-                  AuthService().signOut();
-                  Get.offAll(LoginScreen(),
-                      transition: Transition.leftToRightWithFade);
-                } else {
-                  Get.off(LoginScreen(),
-                      transition: Transition.leftToRightWithFade);
-                }
+                Get.offAll(SelectUser());
               }
               if (value == 1) {
                 Get.offAll(Dashboard(),
@@ -53,13 +47,8 @@ class SelectChallenge extends StatelessWidget {
                 child: Text("Progress"),
                 value: 2,
               ),
-              _questionControllerInstance.isGuest.value
-                  ? PopupMenuItem(
-                      child: Text("Sign In"),
-                      value: 3,
-                    )
-                  : PopupMenuItem(
-                      child: Text("Logout"),
+               PopupMenuItem(
+                      child: Text("Change User"),
                       value: 3,
                     ),
             ],

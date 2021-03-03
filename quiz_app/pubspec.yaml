@@ -35,6 +35,8 @@ dependencies:
   google_fonts: ^1.1.2
   katex_flutter: ^4.0.1
   catex: ^0.0.1+7
+  hive:
+  hive_flutter:
 
   
  
@@ -46,6 +48,8 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  hive_generator:
+  build_runner:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.7.0"

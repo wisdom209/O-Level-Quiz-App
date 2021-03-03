@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quiz_app/Backend/AuthService.dart';
-import 'package:quiz_app/GetController/QuestionController.dart';
+
 import '../Components/SelectYearBtn.dart';
 import 'Dashboard.dart';
 import 'ProgressScreen.dart';
-import 'LoginScreen.dart';
+import 'SelectUser.dart';
+
 
 class SelectYear extends StatelessWidget {
   const SelectYear({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _questionControllerInstance = Get.find();
+   
     List yearList = [];
     for (var i = 0; i < 42; i++) {
       if (i == 18) {
@@ -33,14 +33,7 @@ class SelectYear extends StatelessWidget {
                     transition: Transition.leftToRightWithFade);
               }
               if (value == 3) {
-                if (!_questionControllerInstance.isGuest.value) {
-                  AuthService().signOut();
-                  Get.offAll(LoginScreen(),
-                      transition: Transition.leftToRightWithFade);
-                } else {
-                  Get.off(LoginScreen(),
-                      transition: Transition.leftToRightWithFade);
-                }
+                Get.offAll(SelectUser());
               }
               if (value == 1) {
                 Get.offAll(Dashboard(),
@@ -56,13 +49,8 @@ class SelectYear extends StatelessWidget {
                 child: Text("Progress"),
                 value: 2,
               ),
-              _questionControllerInstance.isGuest.value
-                  ? PopupMenuItem(
-                      child: Text("Sign In"),
-                      value: 3,
-                    )
-                  : PopupMenuItem(
-                      child: Text("Logout"),
+               PopupMenuItem(
+                      child: Text("Change User"),
                       value: 3,
                     ),
             ],

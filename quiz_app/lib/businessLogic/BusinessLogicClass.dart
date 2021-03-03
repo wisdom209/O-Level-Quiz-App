@@ -2,28 +2,28 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quiz_app/Backend/CollectionService.dart';
+// import 'package:quiz_app/Backend/CollectionService.dart';
 import 'package:quiz_app/Components/QuestionContainer.dart';
 import 'package:quiz_app/GetController/QuestionController.dart';
 import 'package:http/http.dart' as http;
 import 'package:quiz_app/Models/questionModel.dart';
 
 class BusinessLogicClass {
-  void getProgressData() {
-    var subjectList = [
-      'government',
-      'mathematics',
-      'biology',
-      'physics',
-      'chemistry',
-      'literature-in-english',
-      'crs'
-    ];
+  // void getProgressData() {
+  //   var subjectList = [
+  //     'government',
+  //     'mathematics',
+  //     'biology',
+  //     'physics',
+  //     'chemistry',
+  //     'literature-in-english',
+  //     'crs'
+  //   ];
 
-    for (var i = 0; i < subjectList.length; i++) {
-      CollectionService().readProgress(subject: "${subjectList[i]}");
-    }
-  }
+  //   for (var i = 0; i < subjectList.length; i++) {
+  //     CollectionService().readProgress(subject: "${subjectList[i]}");
+  //   }
+  // }
 
   Future getData() async {
     QuestionController _questionControllerinstance = Get.find();
@@ -137,4 +137,5 @@ class BusinessLogicClass {
       return "No question answered";
     }
   }
+  
 }

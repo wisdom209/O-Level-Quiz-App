@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
-import '../Backend/CollectionService.dart';
 import '../Constants/AppConstants.dart';
 import '../GetController/QuestionController.dart';
 import '../businessLogic/BusinessLogicClass.dart';
+import '../businessLogic/HiveOperations.dart';
 import 'Dashboard.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -22,10 +22,12 @@ class ResultScreen extends StatelessWidget {
               Get.offAll(Dashboard(),
                   transition: Transition.leftToRightWithFade);
               try {
-                CollectionService().updateProgress(
-                    score: BusinessLogicClass().calculateScore(),
-                    subject: _questionControllerInstance.subjectedSelected.value
-                        .toLowerCase());
+            
+                HiveManipulation().addScore(
+                  userName: _questionControllerInstance.hiveUserName.value,
+                  subject: _questionControllerInstance.subjectedSelected.value
+                      .toLowerCase(),
+                  score: BusinessLogicClass().calculateScore());
               } catch (e) {
                 //print e.toString();
               }

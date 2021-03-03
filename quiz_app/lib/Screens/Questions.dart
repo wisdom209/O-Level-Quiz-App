@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:quiz_app/Constants/AppConstants.dart';
+import 'package:quiz_app/businessLogic/HiveOperations.dart';
 
-import '../Backend/CollectionService.dart';
 import '../GetController/QuestionController.dart';
 import '../businessLogic/BusinessLogicClass.dart';
 import 'Dashboard.dart';
@@ -35,11 +35,18 @@ class Questions extends StatelessWidget {
                   onFinish: () {
                     if (BusinessLogicClass().calculateScore() !=
                         "No question answered") {
-                      CollectionService().updateProgress(
-                          score: BusinessLogicClass().calculateScore(),
+                      // CollectionService().updateProgress(
+                      //     score: BusinessLogicClass().calculateScore(),
+                      //     subject: _questionControllerInstance
+                      //         .subjectedSelected.value
+                      //         .toLowerCase());
+                      HiveManipulation().addScore(
+                          userName:
+                              _questionControllerInstance.hiveUserName.value,
                           subject: _questionControllerInstance
                               .subjectedSelected.value
-                              .toLowerCase());
+                              .toLowerCase(),
+                          score: BusinessLogicClass().calculateScore());
                     }
 
                     Get.offAll(ResultScreen(),
@@ -100,10 +107,11 @@ class Questions extends StatelessWidget {
           } else if (_questionControllerInstance.isExam.value) {
             if (BusinessLogicClass().calculateScore() !=
                 "No question answered") {
-              CollectionService().updateProgress(
-                  score: BusinessLogicClass().calculateScore(),
+              HiveManipulation().addScore(
+                  userName: _questionControllerInstance.hiveUserName.value,
                   subject: _questionControllerInstance.subjectedSelected.value
-                      .toLowerCase());
+                      .toLowerCase(),
+                  score: BusinessLogicClass().calculateScore());
             }
 
             Get.offAll(ResultScreen(),
@@ -122,11 +130,9 @@ class Questions extends StatelessWidget {
             child: FutureBuilder(
           future: BusinessLogicClass().getData(),
           builder: (context, snapshot) {
-                     
             if (snapshot.connectionState == ConnectionState.done) {
-               //
+              //
               if (snapshot.data == null) {
-                
                 return Center(
                     child: Container(
                   child: Column(
@@ -156,6 +162,7 @@ class Questions extends StatelessWidget {
                 BusinessLogicClass().getTheQuestionsRequested(
                     questionData: questionData, year: year);
 
+                //TODO: FOR REVIEW; A FUTURE IMPLEMENTATION
                 // if (BusinessLogicClass()
                 //         .getTheQuestionsRequested(
                 //             questionData: questionData, year: year)
@@ -165,7 +172,7 @@ class Questions extends StatelessWidget {
                 //     child: Text("No questions to review"),
                 //   );
                 // }
-               // print(_questionControllerInstance.subjectedSelected.value);
+                // print(_questionControllerInstance.subjectedSelected.value);
 
                 return _questionControllerInstance.subjectedSelected.value !=
                         "mathematics"
@@ -178,18 +185,19 @@ class Questions extends StatelessWidget {
                         ),
                       )
                     : Container(
-                      child: ListView.builder( 
-                        addAutomaticKeepAlives: true,
-                          addRepaintBoundaries: true,                  
+                        child: ListView.builder(
+                          addAutomaticKeepAlives: true,
+                          addRepaintBoundaries: true,
                           itemCount: BusinessLogicClass()
                               .getTheQuestionsRequested(
                                   questionData: questionData, year: year)
                               .length,
                           itemBuilder: (context, index) => BusinessLogicClass()
                               .getTheQuestionsRequested(
-                                  questionData: questionData, year: year)[index],
+                                  questionData: questionData,
+                                  year: year)[index],
                         ),
-                    );
+                      );
               }
             }
 

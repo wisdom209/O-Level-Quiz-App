@@ -1,16 +1,12 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:quiz_app/businessLogic/HiveOperations.dart';
 
-import '../Backend/CollectionService.dart';
 import '../Constants/AppConstants.dart';
-import '../GetController/QuestionController.dart';
-import '../businessLogic/BusinessLogicClass.dart';
-import 'Dashboard.dart';
-import 'LoginScreen.dart';
+import 'SelectUser.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -25,18 +21,12 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-   QuestionController _questionControllerInstance = Get.find();
-    if (FirebaseAuth.instance.currentUser != null) {
-      _questionControllerInstance.isGuest.value = false;
-      CollectionService().getUserNameFuture();
-      BusinessLogicClass().getProgressData();
-    }
+    HiveManipulation().init();
+    HiveManipulation().register();
+
     Timer(Duration(seconds: 3), () {
-      FirebaseAuth.instance.currentUser == null
-          ? Get.offAll(LoginScreen())
-          : Get.offAll(Dashboard());
+      Get.offAll(SelectUser());
     });
-    
   }
 
   @override
@@ -85,6 +75,4 @@ class _HomeState extends State<Home> {
               ],
             )));
   }
-
-
 }

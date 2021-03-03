@@ -9,6 +9,7 @@ class QuestionController extends GetxController {
   var selectedYear = "1979".obs;
   var subjectedSelected = "Select an option".obs;
   Map answerSheet = {}.obs;
+  var hiveUserName = "".obs;
   var userName = "".obs;
   var emailName = "".obs;
   var passwordName = "".obs;
