@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_math/flutter_math.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
@@ -7,34 +8,22 @@ import '../GetController/QuestionController.dart';
 
 class SelectAnswerBtn extends StatelessWidget {
   SelectAnswerBtn({
-    Key key,
-    this.option,
     this.optionText,
-    this.answer,
-    this.questionNumber,
-    this.index,
-    this.selectFunction,
-    this.btnColor,
-    this.optionLetter,
-  }) : super(key: key);
+  });
 
-  final String option;
   final String optionText;
-  final String answer;
-  final String optionLetter;
-  final Color btnColor;
-  final Function selectFunction;
-  final int index;
-  final int questionNumber;
 
   Widget build(BuildContext context) {
     QuestionController _questionControllerInstance = Get.find();
+
     return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Container(
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // onPressed: (){},
-          decoration: BoxDecoration(border: Border.all(color: Colors.grey[800],width: 0.2), color: Colors.white),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[800], width: 0.2),
+              color: Colors.white),
           //color: Colors.white,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

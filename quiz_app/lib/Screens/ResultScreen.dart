@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 
 import '../Constants/AppConstants.dart';
-import '../GetController/QuestionController.dart';
 import '../businessLogic/BusinessLogicClass.dart';
-import '../businessLogic/HiveOperations.dart';
 import 'Dashboard.dart';
 
 class ResultScreen extends StatelessWidget {
   //const ResultScreen({Key key}) : super(key: key);
-  final QuestionController _questionControllerInstance = Get.find();
+  
 
   @override
   Widget build(BuildContext context) {

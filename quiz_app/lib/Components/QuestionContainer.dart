@@ -34,7 +34,8 @@ class QuestionContainer extends StatefulWidget {
   _QuestionContainerState createState() => _QuestionContainerState();
 }
 
-class _QuestionContainerState extends State<QuestionContainer> with AutomaticKeepAliveClientMixin {
+class _QuestionContainerState extends State<QuestionContainer>
+    with AutomaticKeepAliveClientMixin {
   QuestionController _questionControllerInstance = Get.find();
   Color btn;
   List btnSelected;
@@ -136,43 +137,37 @@ class _QuestionContainerState extends State<QuestionContainer> with AutomaticKee
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey[800],width: 0.2),
+                                    border: Border.all(
+                                        color: Colors.grey[800], width: 0.2),
                                     color: btnA),
-                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin: EdgeInsets.only(
-                                   left: 8, right: 8, top: 5 ),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                margin:
+                                    EdgeInsets.only(left: 8, right: 8, top: 5),
                                 child: GestureDetector(
                                   child: Text("A."),
                                   onTap: () =>
                                       selectButtonMethod(btn: btnA, index: 0),
                                 ),
                               ),
-                             
                               Expanded(
                                 child: SelectAnswerBtn(
-                                    key: UniqueKey(),
-                                    index: 0,
-                                    questionNumber:
-                                        int.parse(widget.questionNumber),
-                                    option: "A",
-                                    optionText: widget.optionA,
-                                    selectFunction: () =>
-                                        selectButtonMethod(btn: btnA, index: 0),
-                                    btnColor: btnA),
+                                  optionText: widget.optionA,
+                                ),
                               ),
                             ],
                           ),
-                          
+
                           //B
                           Row(
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    border: Border.all(
+                                        color: Colors.grey[800], width: 0.2),
                                     color: btnB),
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                    margin: EdgeInsets.only(
-                                   left: 8, right: 8, top: 5 ),
+                                margin:
+                                    EdgeInsets.only(left: 8, right: 8, top: 5),
                                 child: GestureDetector(
                                   child: Text("B."),
                                   onTap: () =>
@@ -181,29 +176,23 @@ class _QuestionContainerState extends State<QuestionContainer> with AutomaticKee
                               ),
                               Expanded(
                                 child: SelectAnswerBtn(
-                                  key: UniqueKey(),
-                                  index: 1,
-                                  questionNumber: int.parse(widget.questionNumber),
-                                  option: "B",
                                   optionText: widget.optionB,
-                                  selectFunction: () =>
-                                      selectButtonMethod(btn: btnB, index: 1),
-                                  btnColor: btnB,
                                 ),
                               ),
                             ],
                           ),
-                          
+
                           //C
                           Row(
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    border: Border.all(
+                                        color: Colors.grey[800], width: 0.2),
                                     color: btnC),
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                   margin: EdgeInsets.only(
-                                   left: 8, right: 8, top: 5 ),
+                                margin:
+                                    EdgeInsets.only(left: 8, right: 8, top: 5),
                                 child: GestureDetector(
                                   child: Text("C."),
                                   onTap: () =>
@@ -212,29 +201,23 @@ class _QuestionContainerState extends State<QuestionContainer> with AutomaticKee
                               ),
                               Expanded(
                                 child: SelectAnswerBtn(
-                                  key: UniqueKey(),
-                                  index: 2,
-                                  questionNumber: int.parse(widget.questionNumber),
-                                  option: "C",
                                   optionText: widget.optionC,
-                                  selectFunction: () =>
-                                      selectButtonMethod(btn: btnC, index: 2),
-                                  btnColor: btnC,
                                 ),
                               ),
                             ],
                           ),
-                          
+
                           //D
                           Row(
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    border: Border.all(
+                                        color: Colors.grey[800], width: 0.2),
                                     color: btnD),
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                    margin: EdgeInsets.only(
-                                   left: 8, right: 8, top: 5 ),
+                                margin:
+                                    EdgeInsets.only(left: 8, right: 8, top: 5),
                                 child: GestureDetector(
                                   child: Text("D."),
                                   onTap: () =>
@@ -243,29 +226,23 @@ class _QuestionContainerState extends State<QuestionContainer> with AutomaticKee
                               ),
                               Expanded(
                                 child: SelectAnswerBtn(
-                                  key: UniqueKey(),
-                                  index: 3,
-                                  questionNumber: int.parse(widget.questionNumber),
-                                  option: "D",
                                   optionText: widget.optionD,
-                                  selectFunction: () =>
-                                      selectButtonMethod(btn: btnD, index: 3),
-                                  btnColor: btnD,
                                 ),
                               ),
                             ],
                           ),
-                          
+
                           //E
                           Row(
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    border: Border.all(
+                                        color: Colors.grey[800], width: 0.2),
                                     color: btnE),
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                   margin: EdgeInsets.only(
-                                   left: 8, right: 8, top: 5 ),
+                                margin:
+                                    EdgeInsets.only(left: 8, right: 8, top: 5),
                                 child: GestureDetector(
                                   child: Text("E."),
                                   onTap: () =>
@@ -274,14 +251,7 @@ class _QuestionContainerState extends State<QuestionContainer> with AutomaticKee
                               ),
                               Expanded(
                                 child: SelectAnswerBtn(
-                                  key: UniqueKey(),
-                                  index: 4,
-                                  questionNumber: int.parse(widget.questionNumber),
-                                  option: "E",
                                   optionText: widget.optionE,
-                                  selectFunction: () =>
-                                      selectButtonMethod(index: 4, btn: btnE),
-                                  btnColor: btnE,
                                 ),
                               ),
                             ],

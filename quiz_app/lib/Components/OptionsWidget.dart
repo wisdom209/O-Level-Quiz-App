@@ -60,13 +60,9 @@ class _OptionsWidgetState extends State<OptionsWidget> {
 
 
               return SelectAnswerBtn(
-                  key: Key("$index"),
+                  
                   optionText: options[index][0],
-                  option: options[index][1],
-                  questionNumber: quesNum,
-                  index: index,
-                  selectFunction: () {},
-                  btnColor: Colors.white);
+                  );
             });
   }
 }
