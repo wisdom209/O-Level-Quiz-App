@@ -21,16 +21,7 @@ class ResultScreen extends StatelessWidget {
             onPressed: () {
               Get.offAll(Dashboard(),
                   transition: Transition.leftToRightWithFade);
-              try {
-            
-                HiveManipulation().addScore(
-                  userName: _questionControllerInstance.hiveUserName.value,
-                  subject: _questionControllerInstance.subjectedSelected.value
-                      .toLowerCase(),
-                  score: BusinessLogicClass().calculateScore());
-              } catch (e) {
-                //print e.toString();
-              }
+           
             },
             child: Text(
               "CONTINUE",
@@ -86,7 +77,7 @@ class ResultScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 60),
                   child: Text(
-                    "${BusinessLogicClass().calculateScore()}",
+                    "${BusinessLogicClass().calculateScore()}/50",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,

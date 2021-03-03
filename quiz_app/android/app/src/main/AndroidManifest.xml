@@ -10,7 +10,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="quiz_app"
+        android:label="O Level Quiz"
         android:icon="@mipmap/quiz_icon"
         android:usesCleartextTraffic="true"
        >

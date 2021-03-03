@@ -34,7 +34,7 @@ class QuestionContainer extends StatefulWidget {
   _QuestionContainerState createState() => _QuestionContainerState();
 }
 
-class _QuestionContainerState extends State<QuestionContainer> {
+class _QuestionContainerState extends State<QuestionContainer> with AutomaticKeepAliveClientMixin {
   QuestionController _questionControllerInstance = Get.find();
   Color btn;
   List btnSelected;
@@ -78,94 +78,216 @@ class _QuestionContainerState extends State<QuestionContainer> {
                     width: MediaQuery.of(context).size.width * 0.95,
                     decoration: BoxDecoration(
                         color: const Color(0xffdcd6d6),
-                        border: Border.all(color: Colors.black)
-                        ,borderRadius: BorderRadius.circular(10)),
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10)),
                     child: Padding(
-                        padding: const EdgeInsets.only( bottom: 12),
+                        padding: const EdgeInsets.only(bottom: 12),
                         child: Column(children: [
                           widget.image != ""
                               ? Image.network(widget.image)
                               : SizedBox(
                                   height: 0,
                                 ),
-                          
                           Container(
-                            padding:EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10) ,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),color: Colors.brown),
-                            child: ((_questionControllerInstance
-                                              .subjectedSelected.value ==
-                                          "chemistry" ||
-                                      _questionControllerInstance
-                                              .subjectedSelected.value ==
-                                          "mathematics"|| _questionControllerInstance
-                                          .subjectedSelected.value ==
-                                      "physics") &&
-                                  (widget.question.contains('frac') ||
-                                      widget.question.contains('sqrt') || widget.question.contains('circ}')|| widget.question.contains('}')|| widget.question.contains('\\')))
-                              ? TeXView(
-                                  renderingEngine:
-                                      TeXViewRenderingEngine.katex(),
-                                 loadingWidgetBuilder: (context) =>
-                                      LinearProgressIndicator(),
-                                  child: TeXViewDocument(
-                                      "${widget.questionNumber}. ${widget.question}", style: TeXViewStyle(contentColor: Colors.black)),
-                                       
-                                )
-                              : Text(
-                                  "${widget.questionNumber}. ${widget.question}",
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.grey[200]),
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.only(
+                                left: 10, right: 10, top: 10, bottom: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10)),
+                                color: Colors.brown),
+                            child:
+                                ((_questionControllerInstance
+                                                    .subjectedSelected.value ==
+                                                "chemistry" ||
+                                            _questionControllerInstance
+                                                    .subjectedSelected.value ==
+                                                "mathematics" ||
+                                            _questionControllerInstance
+                                                    .subjectedSelected.value ==
+                                                "physics") &&
+                                        (widget.question.contains('frac') ||
+                                            widget.question.contains('sqrt') ||
+                                            widget.question.contains('circ}') ||
+                                            widget.question.contains('}') ||
+                                            widget.question.contains('\\')))
+                                    ? TeXView(
+                                        renderingEngine:
+                                            TeXViewRenderingEngine.katex(),
+                                        loadingWidgetBuilder: (context) =>
+                                            LinearProgressIndicator(),
+                                        child: TeXViewDocument(
+                                            "${widget.questionNumber}. ${widget.question}",
+                                            style: TeXViewStyle(
+                                                contentColor: Colors.black)),
+                                      )
+                                    : Text(
+                                        "${widget.questionNumber}. ${widget.question}",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[200]),
+                                      ),
+                          ),
+
+                          //A
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[800],width: 0.2),
+                                    color: btnA),
+                                 padding: EdgeInsets.symmetric(horizontal: 8),
+                                margin: EdgeInsets.only(
+                                   left: 8, right: 8, top: 5 ),
+                                child: GestureDetector(
+                                  child: Text("A."),
+                                  onTap: () =>
+                                      selectButtonMethod(btn: btnA, index: 0),
                                 ),
+                              ),
+                             
+                              Expanded(
+                                child: SelectAnswerBtn(
+                                    key: UniqueKey(),
+                                    index: 0,
+                                    questionNumber:
+                                        int.parse(widget.questionNumber),
+                                    option: "A",
+                                    optionText: widget.optionA,
+                                    selectFunction: () =>
+                                        selectButtonMethod(btn: btnA, index: 0),
+                                    btnColor: btnA),
+                              ),
+                            ],
                           ),
-                          SelectAnswerBtn(
-                              key: UniqueKey(),
-                              index: 0,
-                              questionNumber: int.parse(widget.questionNumber),
-                              option: "A",
-                              optionText: widget.optionA,
-                              selectFunction: () =>
-                                  selectButtonMethod(btn: btnA, index: 0),
-                              btnColor: btnA),
-                          SelectAnswerBtn(
-                            key: UniqueKey(),
-                            index: 1,
-                            questionNumber: int.parse(widget.questionNumber),
-                            option: "B",
-                            optionText: widget.optionB,
-                            selectFunction: () =>
-                                selectButtonMethod(btn: btnB, index: 1),
-                            btnColor: btnB,
+                          
+                          //B
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    color: btnB),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                    margin: EdgeInsets.only(
+                                   left: 8, right: 8, top: 5 ),
+                                child: GestureDetector(
+                                  child: Text("B."),
+                                  onTap: () =>
+                                      selectButtonMethod(btn: btnB, index: 1),
+                                ),
+                              ),
+                              Expanded(
+                                child: SelectAnswerBtn(
+                                  key: UniqueKey(),
+                                  index: 1,
+                                  questionNumber: int.parse(widget.questionNumber),
+                                  option: "B",
+                                  optionText: widget.optionB,
+                                  selectFunction: () =>
+                                      selectButtonMethod(btn: btnB, index: 1),
+                                  btnColor: btnB,
+                                ),
+                              ),
+                            ],
                           ),
-                          SelectAnswerBtn(
-                            key: UniqueKey(),
-                            index: 2,
-                            questionNumber: int.parse(widget.questionNumber),
-                            option: "C",
-                            optionText: widget.optionC,
-                            selectFunction: () =>
-                                selectButtonMethod(btn: btnC, index: 2),
-                            btnColor: btnC,
+                          
+                          //C
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    color: btnC),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                   margin: EdgeInsets.only(
+                                   left: 8, right: 8, top: 5 ),
+                                child: GestureDetector(
+                                  child: Text("C."),
+                                  onTap: () =>
+                                      selectButtonMethod(btn: btnC, index: 2),
+                                ),
+                              ),
+                              Expanded(
+                                child: SelectAnswerBtn(
+                                  key: UniqueKey(),
+                                  index: 2,
+                                  questionNumber: int.parse(widget.questionNumber),
+                                  option: "C",
+                                  optionText: widget.optionC,
+                                  selectFunction: () =>
+                                      selectButtonMethod(btn: btnC, index: 2),
+                                  btnColor: btnC,
+                                ),
+                              ),
+                            ],
                           ),
-                          SelectAnswerBtn(
-                            key: UniqueKey(),
-                            index: 3,
-                            questionNumber: int.parse(widget.questionNumber),
-                            option: "D",
-                            optionText: widget.optionD,
-                            selectFunction: () =>
-                                selectButtonMethod(btn: btnD, index: 3),
-                            btnColor: btnD,
+                          
+                          //D
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    color: btnD),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                    margin: EdgeInsets.only(
+                                   left: 8, right: 8, top: 5 ),
+                                child: GestureDetector(
+                                  child: Text("D."),
+                                  onTap: () =>
+                                      selectButtonMethod(btn: btnD, index: 3),
+                                ),
+                              ),
+                              Expanded(
+                                child: SelectAnswerBtn(
+                                  key: UniqueKey(),
+                                  index: 3,
+                                  questionNumber: int.parse(widget.questionNumber),
+                                  option: "D",
+                                  optionText: widget.optionD,
+                                  selectFunction: () =>
+                                      selectButtonMethod(btn: btnD, index: 3),
+                                  btnColor: btnD,
+                                ),
+                              ),
+                            ],
                           ),
-                          SelectAnswerBtn(
-                            key: UniqueKey(),
-                            index: 4,
-                            questionNumber: int.parse(widget.questionNumber),
-                            option: "E",
-                            optionText: widget.optionE,
-                            selectFunction: () =>
-                                selectButtonMethod(index: 4, btn: btnE),
-                            btnColor: btnE,
+                          
+                          //E
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[800], width: 0.2),
+                                    color: btnE),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                   margin: EdgeInsets.only(
+                                   left: 8, right: 8, top: 5 ),
+                                child: GestureDetector(
+                                  child: Text("E."),
+                                  onTap: () =>
+                                      selectButtonMethod(btn: btnE, index: 4),
+                                ),
+                              ),
+                              Expanded(
+                                child: SelectAnswerBtn(
+                                  key: UniqueKey(),
+                                  index: 4,
+                                  questionNumber: int.parse(widget.questionNumber),
+                                  option: "E",
+                                  optionText: widget.optionE,
+                                  selectFunction: () =>
+                                      selectButtonMethod(index: 4, btn: btnE),
+                                  btnColor: btnE,
+                                ),
+                              ),
+                            ],
                           ),
-                          _questionControllerInstance.isStudy.value || _questionControllerInstance.isReview.value
+                          _questionControllerInstance.isStudy.value ||
+                                  _questionControllerInstance.isReview.value
                               ? AnswerButton(
                                   answer: widget.answer,
                                 )
@@ -225,4 +347,8 @@ class _QuestionContainerState extends State<QuestionContainer> {
       btn = btnSelected[index] ? Colors.lightBlue[200] : Colors.white;
     });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

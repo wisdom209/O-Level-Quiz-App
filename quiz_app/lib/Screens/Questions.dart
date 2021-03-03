@@ -13,8 +13,19 @@ import 'Dashboard.dart';
 import 'ResultScreen.dart';
 import 'SelectChallenge.dart';
 
-class Questions extends StatelessWidget {
+class Questions extends StatefulWidget {
+  @override
+  _QuestionsState createState() => _QuestionsState();
+}
+
+class _QuestionsState extends State<Questions>
+    with AutomaticKeepAliveClientMixin {
   final QuestionController _questionControllerInstance = Get.find();
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     _questionControllerInstance.resultSheet = {};
@@ -35,11 +46,6 @@ class Questions extends StatelessWidget {
                   onFinish: () {
                     if (BusinessLogicClass().calculateScore() !=
                         "No question answered") {
-                      // CollectionService().updateProgress(
-                      //     score: BusinessLogicClass().calculateScore(),
-                      //     subject: _questionControllerInstance
-                      //         .subjectedSelected.value
-                      //         .toLowerCase());
                       HiveManipulation().addScore(
                           userName:
                               _questionControllerInstance.hiveUserName.value,
@@ -174,30 +180,21 @@ class Questions extends StatelessWidget {
                 // }
                 // print(_questionControllerInstance.subjectedSelected.value);
 
-                return _questionControllerInstance.subjectedSelected.value !=
-                        "mathematics"
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ...BusinessLogicClass().getTheQuestionsRequested(
-                                questionData: questionData, year: year),
-                          ],
-                        ),
-                      )
-                    : Container(
-                        child: ListView.builder(
-                          addAutomaticKeepAlives: true,
-                          addRepaintBoundaries: true,
-                          itemCount: BusinessLogicClass()
-                              .getTheQuestionsRequested(
-                                  questionData: questionData, year: year)
-                              .length,
-                          itemBuilder: (context, index) => BusinessLogicClass()
-                              .getTheQuestionsRequested(
-                                  questionData: questionData,
-                                  year: year)[index],
-                        ),
-                      );
+                return Container(
+                  child: ListView.builder(
+                    addAutomaticKeepAlives: true,
+                    addRepaintBoundaries: true,
+                    itemCount: BusinessLogicClass()
+                        .getTheQuestionsRequested(
+                            questionData: questionData, year: year)
+                        .length,
+                    itemBuilder: (context, index) => BusinessLogicClass()
+                        .getTheQuestionsRequested(
+                            questionData: questionData, year: year)[index],
+                  ),
+                );
+
+               
               }
             }
 

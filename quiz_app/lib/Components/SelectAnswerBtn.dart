@@ -34,22 +34,14 @@ class SelectAnswerBtn extends StatelessWidget {
         child: Container(
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // onPressed: (){},
-          color: Colors.white,
+          decoration: BoxDecoration(border: Border.all(color: Colors.grey[800],width: 0.2), color: Colors.white),
+          //color: Colors.white,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.black), color: btnColor),
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical:8 ),
-                child: GestureDetector(
-                  child:Text("$option."), onTap: selectFunction,),
-              ),
-              //Text("$option.   "),
               Padding(
-                padding: const EdgeInsets.only(top:8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: SizedBox(
-                  
                     width: MediaQuery.of(context).size.width * 0.65,
                     child: ((_questionControllerInstance
                                         .subjectedSelected.value ==
