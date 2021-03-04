@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'SelectAnswerBtn.dart';
+import 'QuestionAnswerTab.dart';
 
 class OptionsWidget extends StatefulWidget {
   const OptionsWidget({
@@ -59,7 +59,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
               });
 
 
-              return SelectAnswerBtn(
+              return QuestionAnswerTab(
                   
                   optionText: options[index][0],
                   );

@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import '../GetController/QuestionController.dart';
 
-class SelectAnswerBtn extends StatelessWidget {
-  SelectAnswerBtn({
+class QuestionAnswerTab extends StatelessWidget {
+  QuestionAnswerTab({
     this.optionText,
   });
 
@@ -19,12 +19,11 @@ class SelectAnswerBtn extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Container(
-          // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          // onPressed: (){},
+          margin: EdgeInsets.only(right: 8),
+          padding: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey[800], width: 0.2),
               color: Colors.white),
-          //color: Colors.white,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

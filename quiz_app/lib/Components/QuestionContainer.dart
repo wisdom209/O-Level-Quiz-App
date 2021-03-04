@@ -3,7 +3,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:get/get.dart';
 
 import '../GetController/QuestionController.dart';
-import 'SelectAnswerBtn.dart';
+import 'QuestionAnswerTab.dart';
 import 'answerbtn.dart';
 
 class QuestionContainer extends StatefulWidget {
@@ -61,6 +61,7 @@ class _QuestionContainerState extends State<QuestionContainer>
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     btnA = btnSelected[0] ? Colors.lightBlue[200] : Colors.white;
     btnB = btnSelected[1] ? Colors.lightBlue[200] : Colors.white;
@@ -135,22 +136,12 @@ class _QuestionContainerState extends State<QuestionContainer>
                           //A
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey[800], width: 0.2),
-                                    color: btnA),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin:
-                                    EdgeInsets.only(left: 8, right: 8, top: 5),
-                                child: GestureDetector(
-                                  child: Text("A."),
-                                  onTap: () =>
-                                      selectButtonMethod(btn: btnA, index: 0),
-                                ),
-                              ),
+                              buttonAnswerMethod(
+                                  btnAnswerColor: btnA,
+                                  btnAnswerIndex: 0,
+                                  btnAnswerText: "A"),
                               Expanded(
-                                child: SelectAnswerBtn(
+                                child: QuestionAnswerTab(
                                   optionText: widget.optionA,
                                 ),
                               ),
@@ -160,22 +151,12 @@ class _QuestionContainerState extends State<QuestionContainer>
                           //B
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey[800], width: 0.2),
-                                    color: btnB),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin:
-                                    EdgeInsets.only(left: 8, right: 8, top: 5),
-                                child: GestureDetector(
-                                  child: Text("B."),
-                                  onTap: () =>
-                                      selectButtonMethod(btn: btnB, index: 1),
-                                ),
-                              ),
+                              buttonAnswerMethod(
+                                  btnAnswerColor: btnB,
+                                  btnAnswerIndex: 1,
+                                  btnAnswerText: "B"),
                               Expanded(
-                                child: SelectAnswerBtn(
+                                child: QuestionAnswerTab(
                                   optionText: widget.optionB,
                                 ),
                               ),
@@ -185,22 +166,12 @@ class _QuestionContainerState extends State<QuestionContainer>
                           //C
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey[800], width: 0.2),
-                                    color: btnC),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin:
-                                    EdgeInsets.only(left: 8, right: 8, top: 5),
-                                child: GestureDetector(
-                                  child: Text("C."),
-                                  onTap: () =>
-                                      selectButtonMethod(btn: btnC, index: 2),
-                                ),
-                              ),
+                              buttonAnswerMethod(
+                                  btnAnswerColor: btnC,
+                                  btnAnswerIndex: 2,
+                                  btnAnswerText: "C"),
                               Expanded(
-                                child: SelectAnswerBtn(
+                                child: QuestionAnswerTab(
                                   optionText: widget.optionC,
                                 ),
                               ),
@@ -210,22 +181,12 @@ class _QuestionContainerState extends State<QuestionContainer>
                           //D
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey[800], width: 0.2),
-                                    color: btnD),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin:
-                                    EdgeInsets.only(left: 8, right: 8, top: 5),
-                                child: GestureDetector(
-                                  child: Text("D."),
-                                  onTap: () =>
-                                      selectButtonMethod(btn: btnD, index: 3),
-                                ),
-                              ),
+                              buttonAnswerMethod(
+                                  btnAnswerColor: btnD,
+                                  btnAnswerIndex: 3,
+                                  btnAnswerText: 'D'),
                               Expanded(
-                                child: SelectAnswerBtn(
+                                child: QuestionAnswerTab(
                                   optionText: widget.optionD,
                                 ),
                               ),
@@ -235,27 +196,19 @@ class _QuestionContainerState extends State<QuestionContainer>
                           //E
                           Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey[800], width: 0.2),
-                                    color: btnE),
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                margin:
-                                    EdgeInsets.only(left: 8, right: 8, top: 5),
-                                child: GestureDetector(
-                                  child: Text("E."),
-                                  onTap: () =>
-                                      selectButtonMethod(btn: btnE, index: 4),
-                                ),
-                              ),
+                              buttonAnswerMethod(
+                                  btnAnswerColor: btnE,
+                                  btnAnswerIndex: 4,
+                                  btnAnswerText: "E"),
                               Expanded(
-                                child: SelectAnswerBtn(
+                                child: QuestionAnswerTab(
                                   optionText: widget.optionE,
                                 ),
                               ),
                             ],
                           ),
+
+                          //Show Answe Rowe
                           _questionControllerInstance.isStudy.value ||
                                   _questionControllerInstance.isReview.value
                               ? AnswerButton(
@@ -267,6 +220,23 @@ class _QuestionContainerState extends State<QuestionContainer>
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container buttonAnswerMethod(
+      {Color btnAnswerColor, String btnAnswerText, int btnAnswerIndex}) {
+    return Container(
+      decoration: BoxDecoration(boxShadow: ([BoxShadow(blurRadius: 1.0, offset: Offset(1.0, 1.0),color: Colors.grey[800])])),
+      margin: EdgeInsets.only(left: 8, right: 8, top: 10, bottom: 0),
+      child: FlatButton(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        child: Center(child: Text("$btnAnswerText.")),
+        color: btnAnswerColor,
+        minWidth: 40,
+        height: 25,
+        onPressed: () =>
+            selectButtonMethod(btn: btnAnswerColor, index: btnAnswerIndex),
       ),
     );
   }

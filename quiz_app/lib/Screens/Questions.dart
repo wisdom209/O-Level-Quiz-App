@@ -27,6 +27,7 @@ class _QuestionsState extends State<Questions>
   bool get wantKeepAlive => true;
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     _questionControllerInstance.resultSheet = {};
     _questionControllerInstance.answerSheet = {};
