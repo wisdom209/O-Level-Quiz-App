@@ -14,7 +14,6 @@ import '../businessLogic/HiveOperations.dart';
 import 'Dashboard.dart';
 import 'SelectUser.dart';
 
-
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({Key key}) : super(key: key);
 
@@ -32,19 +31,23 @@ class _ProgressScreenState extends State<ProgressScreen> {
           subject: "chemistry",
           username: _questionControllerInstance.hiveUserName.value);
     });
-    Timer(Duration(milliseconds: 500), () {
-      setState(() {});
-    });
+    // Timer(Duration.zero, () {
+    //   setState(() {});
+    // });
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => Timer(Duration(milliseconds: 100), () {
+              setState(() {});
+            }));
   }
 
   @override
   Widget build(BuildContext context) {
     QuestionController _questionControllerInstance = Get.find();
-    
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(_questionControllerInstance.hiveUserName.value.capitalizeFirst),
+          title: Text(
+              _questionControllerInstance.hiveUserName.value.capitalizeFirst),
           leading: Icon(
             Icons.timeline_outlined,
             color: Colors.white,
@@ -80,86 +83,90 @@ class _ProgressScreenState extends State<ProgressScreen> {
             future: HiveManipulation().readProgress(
                 subject: "chemistry",
                 username: _questionControllerInstance.hiveUserName.value),
-            builder: (context, snapshot) => snapshot.connectionState ==
-                    ConnectionState.done
-                ? ValueListenableBuilder(
-                    valueListenable: Hive.box("AppBox").listenable(
-                        keys: [_questionControllerInstance.hiveUserName.value]),
-                    builder: (context, value, child) => ListView(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.15,
-                        ),
-                        Center(
-                            child: SizedBox(
-                          child: SvgPicture.string(AppConstants().timelineSvg),
-                        )),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        ProgressContainer(
-                            subject: "Chemistry",
-                            bestScore:
-                                GetScores().getBestScore(subject: 'chemistry'),
-                            leastScore:
-                                GetScores().getLeastScore(subject: "chemistry"),
-                            averageScore: GetScores()
-                                .getAverageScore(subject: "chemistry")),
-                        ProgressContainer(
-                            subject: "Mathematics",
-                            bestScore: GetScores()
-                                .getBestScore(subject: 'mathematics'),
-                            leastScore: GetScores()
-                                .getLeastScore(subject: "mathematics"),
-                            averageScore: GetScores()
-                                .getAverageScore(subject: "mathematics")),
-                        ProgressContainer(
-                            subject: "Physics",
-                            bestScore:
-                                GetScores().getBestScore(subject: 'physics'),
-                            leastScore:
-                                GetScores().getLeastScore(subject: "physics"),
-                            averageScore: GetScores()
-                                .getAverageScore(subject: "physics")),
-                        ProgressContainer(
-                            subject: "Government",
-                            bestScore:
-                                GetScores().getBestScore(subject: 'government'),
-                            leastScore: GetScores()
-                                .getLeastScore(subject: "government"),
-                            averageScore: GetScores()
-                                .getAverageScore(subject: "government")),
-                        ProgressContainer(
-                            subject: "CRS",
-                            bestScore: GetScores().getBestScore(subject: 'crs'),
-                            leastScore:
-                                GetScores().getLeastScore(subject: "crs"),
-                            averageScore:
-                                GetScores().getAverageScore(subject: "crs")),
-                        ProgressContainer(
-                            subject: "Biology",
-                            bestScore:
-                                GetScores().getBestScore(subject: 'biology'),
-                            leastScore:
-                                GetScores().getLeastScore(subject: "biology"),
-                            averageScore: GetScores()
-                                .getAverageScore(subject: "biology")),
-                        ProgressContainer(
-                            subject: "Literature-in-english",
-                            bestScore: GetScores()
-                                .getBestScore(subject: 'literature-in-english'),
-                            leastScore: GetScores().getLeastScore(
-                                subject: "literature-in-english"),
-                            averageScore: GetScores().getAverageScore(
-                                subject: "literature-in-english")),
-                        SizedBox(
-                          height: 20,
-                        )
-                      ],
-                    ),
-                  )
-                : Center(
-                    child: Text(""),
-                  )));
+            builder: (context, snapshot) {
+              return snapshot.connectionState == ConnectionState.done
+                  ? ValueListenableBuilder(
+                      valueListenable: Hive.box("AppBox").listenable(keys: [
+                        _questionControllerInstance.hiveUserName.value
+                      ]),
+                      builder: (context, value, child) => ListView(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                          ),
+                          Center(
+                              child: SizedBox(
+                            child:
+                                SvgPicture.string(AppConstants().timelineSvg),
+                          )),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          ProgressContainer(
+                              subject: "Chemistry",
+                              bestScore: GetScores()
+                                  .getBestScore(subject: 'chemistry'),
+                              leastScore: GetScores()
+                                  .getLeastScore(subject: "chemistry"),
+                              averageScore: GetScores()
+                                  .getAverageScore(subject: "chemistry")),
+                          ProgressContainer(
+                              subject: "Mathematics",
+                              bestScore: GetScores()
+                                  .getBestScore(subject: 'mathematics'),
+                              leastScore: GetScores()
+                                  .getLeastScore(subject: "mathematics"),
+                              averageScore: GetScores()
+                                  .getAverageScore(subject: "mathematics")),
+                          ProgressContainer(
+                              subject: "Physics",
+                              bestScore:
+                                  GetScores().getBestScore(subject: 'physics'),
+                              leastScore:
+                                  GetScores().getLeastScore(subject: "physics"),
+                              averageScore: GetScores()
+                                  .getAverageScore(subject: "physics")),
+                          ProgressContainer(
+                              subject: "Government",
+                              bestScore: GetScores()
+                                  .getBestScore(subject: 'government'),
+                              leastScore: GetScores()
+                                  .getLeastScore(subject: "government"),
+                              averageScore: GetScores()
+                                  .getAverageScore(subject: "government")),
+                          ProgressContainer(
+                              subject: "CRS",
+                              bestScore:
+                                  GetScores().getBestScore(subject: 'crs'),
+                              leastScore:
+                                  GetScores().getLeastScore(subject: "crs"),
+                              averageScore:
+                                  GetScores().getAverageScore(subject: "crs")),
+                          ProgressContainer(
+                              subject: "Biology",
+                              bestScore:
+                                  GetScores().getBestScore(subject: 'biology'),
+                              leastScore:
+                                  GetScores().getLeastScore(subject: "biology"),
+                              averageScore: GetScores()
+                                  .getAverageScore(subject: "biology")),
+                          ProgressContainer(
+                              subject: "Literature-in-english",
+                              bestScore: GetScores().getBestScore(
+                                  subject: 'literature-in-english'),
+                              leastScore: GetScores().getLeastScore(
+                                  subject: "literature-in-english"),
+                              averageScore: GetScores().getAverageScore(
+                                  subject: "literature-in-english")),
+                          SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      ),
+                    )
+                  : Center(
+                      child: Text(""),
+                    );
+            }));
   }
 }
