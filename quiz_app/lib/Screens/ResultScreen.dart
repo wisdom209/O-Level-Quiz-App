@@ -8,7 +8,6 @@ import 'Dashboard.dart';
 
 class ResultScreen extends StatelessWidget {
   //const ResultScreen({Key key}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,6 @@ class ResultScreen extends StatelessWidget {
             onPressed: () {
               Get.offAll(Dashboard(),
                   transition: Transition.leftToRightWithFade);
-           
             },
             child: Text(
               "CONTINUE",
@@ -54,7 +52,7 @@ class ResultScreen extends StatelessWidget {
                   child: Text(
                     "${BusinessLogicClass().calculateScore()}" ==
                             "No question answered"
-                        ? ""
+                        ? "Oops . . . "
                         : BusinessLogicClass().calculateScore() < 20
                             ? "Good try. Put more effort ..."
                             : "Good job. Keep it up...",
@@ -74,17 +72,36 @@ class ResultScreen extends StatelessWidget {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 60),
-                  child: Text(
-                    "${BusinessLogicClass().calculateScore()}/50",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "${BusinessLogicClass().calculateScore()} / 50",
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      //TODO: Review the Questions like a study
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: FlatButton(
+                      //     onPressed: () {
+                      //       _questionControllerInstance.isExam.value = false;
+                      //       _questionControllerInstance.isReview.value = true;
+                      //       Get.offAll(Questions());
+                      //     },
+                      //     child: Text("Review Questions"),
+                      //     color: Colors.white,
+                      //   ),
+                      //)
+                    ],
                   ),
                 ),
               ),
             ),
+
             // SelectChallengeBtn(
             //   topPadding: 0,
             //   option: "Review",

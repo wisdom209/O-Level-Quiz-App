@@ -48,7 +48,7 @@ class BusinessLogicClass {
       {@required dynamic questionData, @required String year}) {
     List<Widget> listOfQuestions = List();
     QuestionController _questionControllerInstance = Get.find();
-     String subject =  _questionControllerInstance.subjectedSelected.value;
+    String subject = _questionControllerInstance.subjectedSelected.value;
 
     if (_questionControllerInstance.isExam.value) {
       for (var i = 0; i < 50; i++) {
@@ -70,10 +70,12 @@ class BusinessLogicClass {
             optionD: questionModel.optionD,
             optionE: questionModel.optionE,
             answer: questionModel.answer,
-            image: questionModel.image.length > 5 ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${randYear}Num${i+1}End.jpg":""));
+            image: questionModel.image.length > 5
+                ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${randYear}Num${i + 1}End.jpg"
+                : ""));
       }
-     
     } else if (_questionControllerInstance.isReview.value) {
+      listOfQuestions = _questionControllerInstance.possibleReviewQuestions;
       //TODO
       // var answerMap = _questionControllerInstance.answerSheet;
       // var resultEntries = _questionControllerInstance.resultSheet;
@@ -107,7 +109,9 @@ class BusinessLogicClass {
             optionD: questionModel.optionD,
             optionE: questionModel.optionE,
             answer: questionModel.answer,
-            image: questionModel.image.length > 5 ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${year}Num${i+1}End.jpg":""));
+            image: questionModel.image.length > 5
+                ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${year}Num${i + 1}End.jpg"
+                : ""));
       }
     }
     _questionControllerInstance.possibleReviewQuestions = listOfQuestions;
@@ -138,7 +142,4 @@ class BusinessLogicClass {
       return "No question answered";
     }
   }
-
-  
-  
 }
