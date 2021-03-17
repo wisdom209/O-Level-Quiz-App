@@ -29,10 +29,9 @@ class _ProgressContainerState extends State<ProgressContainer> {
     super.initState();
     QuestionController _questionControllerInstance = Get.find();
     String username = _questionControllerInstance.hiveUserName.value;
-    HiveManipulation()
-        .readProgress(
-            subject: "${widget.subject.toLowerCase()}", username: username)
-        .then((data) => print(data));
+    HiveManipulation().readProgress(
+        subject: "${widget.subject.toLowerCase()}", username: username);
+    // .then((data) => {});
   }
 
   @override

@@ -7,6 +7,8 @@ class GetScores {
   dynamic getBestScore({String subject}) {
     Map subjectScore = {};
 
+    
+
     try {
       if (_questionControllerInstance.subjectScores[subject] != null) {
         subjectScore = _questionControllerInstance.subjectScores[subject];

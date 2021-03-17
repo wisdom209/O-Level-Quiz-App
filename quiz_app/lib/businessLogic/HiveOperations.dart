@@ -119,6 +119,7 @@ class HiveManipulation {
     var personData = await box.get(userName);
     print(personData);
     personData[subject][DateTime.now().toIso8601String()] = score;
+    box.put(userName, personData);
   }
 
   getAllScores({String username, String subject}) async {
@@ -127,6 +128,7 @@ class HiveManipulation {
     var box = await Hive.openBox("AppBox");
 
     var personData = box.get(username);
+
     return personData[subject];
   }
 
@@ -138,7 +140,7 @@ class HiveManipulation {
     } catch (e) {
       print(e.toString());
     }
-
+    //print(progressData);
     if (progressData == null) {
       _questionControllerInstance.subjectScores["${subject.toLowerCase()}"] =
           {};
@@ -146,6 +148,7 @@ class HiveManipulation {
       _questionControllerInstance.subjectScores["${subject.toLowerCase()}"] =
           progressData;
     }
-    print(_questionControllerInstance.subjectScores["${subject.toLowerCase()}"]);
+    // print(
+    //     _questionControllerInstance.subjectScores["${subject.toLowerCase()}"]);
   }
 }

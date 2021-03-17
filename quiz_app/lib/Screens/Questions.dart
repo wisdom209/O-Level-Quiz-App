@@ -142,17 +142,22 @@ class _QuestionsState extends State<Questions>
               if (snapshot.data == null) {
                 return Center(
                     child: Container(
-                  child: Column(
-                    children: [
-                      Icon(Icons.portable_wifi_off_sharp),
-                      Text("Poor or limited Network Connectivity",
-                          style: TextStyle(fontSize: 20, color: Colors.brown)),
-                      RaisedButton(
-                          onPressed: () {
-                            Get.off(Dashboard());
-                          },
-                          child: Text("Back"))
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.40),
+                    child: Column(
+                      children: [
+                        Icon(Icons.portable_wifi_off_sharp),
+                        Text("Poor or limited Network Connectivity",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.brown)),
+                        RaisedButton(
+                            onPressed: () {
+                              Get.off(Dashboard());
+                            },
+                            child: Text("Back"))
+                      ],
+                    ),
                   ),
                 ));
               }
@@ -194,12 +199,24 @@ class _QuestionsState extends State<Questions>
                             questionData: questionData, year: year)[index],
                   ),
                 );
-
-               
               }
             }
 
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.40),
+                  child: Column(
+                    children: [
+                      CircularProgressIndicator(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                            Text("Make sure you are connected to the internet"),
+                      )
+                    ],
+                  )),
+            );
           },
         )),
       ),
