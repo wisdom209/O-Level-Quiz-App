@@ -9,6 +9,30 @@ import 'package:http/http.dart' as http;
 import 'package:quiz_app/Models/questionModel.dart';
 
 class BusinessLogicClass {
+  parseQuestionsToModel(
+      {String year,
+      var questionData,
+      int indexer,
+      List initialList,
+      String subject}) {
+    QuestionModel questionModel =
+        QuestionModel(index: indexer, questionData: questionData, year: year);
+    questionModel.initializeData();
+    initialList.add(QuestionContainer(
+        key: UniqueKey(),
+        questionNumber: "${indexer + 1}",
+        question: questionModel.question,
+        optionA: questionModel.optionA,
+        optionB: questionModel.optionB,
+        optionC: questionModel.optionC,
+        optionD: questionModel.optionD,
+        optionE: questionModel.optionE,
+        answer: questionModel.answer,
+        image: questionModel.image.length > 5
+            ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${year}Num${indexer + 1}End.jpg"
+            : ""));
+  }
+
   Future getData() async {
     QuestionController _questionControllerinstance = Get.find();
     String subject = _questionControllerinstance.subjectedSelected.value;
@@ -20,11 +44,9 @@ class BusinessLogicClass {
         return response.body;
       } else {
         return null;
-        //throw Exception("Error fetching data from the internet");
       }
     } catch (e) {
       return null;
-      //throw Exception("Error fetching data from the internet");
     }
   }
 
@@ -42,53 +64,29 @@ class BusinessLogicClass {
           randYear = "$yearInt";
         }
 
-        QuestionModel questionModel =
-            QuestionModel(index: i, questionData: questionData, year: randYear);
-        questionModel.initializeData();
-        listOfQuestions.add(QuestionContainer(
-            key: UniqueKey(),
-            questionNumber: "${i + 1}",
-            question: questionModel.question,
-            optionA: questionModel.optionA,
-            optionB: questionModel.optionB,
-            optionC: questionModel.optionC,
-            optionD: questionModel.optionD,
-            optionE: questionModel.optionE,
-            answer: questionModel.answer,
-            image: questionModel.image.length > 5
-                ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${randYear}Num${i + 1}End.jpg"
-                : ""));
+        parseQuestionsToModel(
+            indexer: i,
+            year: randYear,
+            questionData: questionData,
+            initialList: listOfQuestions,
+            subject: subject);
       }
     } else if (_questionControllerInstance.isReview.value) {
       return _questionControllerInstance.possibleReviewQuestions;
     } else {
       for (var i = 0; i < 50; i++) {
-        QuestionModel questionModel =
-            QuestionModel(index: i, questionData: questionData, year: year);
-        questionModel.initializeData();
-        listOfQuestions.add(QuestionContainer(
-            key: UniqueKey(),
-            questionNumber: "${i + 1}",
-            question: questionModel.question,
-            optionA: questionModel.optionA,
-            optionB: questionModel.optionB,
-            optionC: questionModel.optionC,
-            optionD: questionModel.optionD,
-            optionE: questionModel.optionE,
-            answer: questionModel.answer,
-            image: questionModel.image.length > 5
-                ? "https://raw.githubusercontent.com/wisdom209/jamb_questions/main/JambPics/$subject/Year${year}Num${i + 1}End.jpg"
-                : ""));
+        parseQuestionsToModel(
+            indexer: i,
+            initialList: listOfQuestions,
+            questionData: questionData,
+            subject: subject,
+            year: year);
       }
     }
+
     _questionControllerInstance.possibleReviewQuestions = listOfQuestions;
-    if (_questionControllerInstance.possibleReviewQuestions ==
-        listOfQuestions) {
-      return listOfQuestions;
-    } else {
-      return null;
-    }
-    
+
+    return listOfQuestions;
   }
 
   dynamic calculateScore() {
