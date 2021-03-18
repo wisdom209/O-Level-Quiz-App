@@ -171,32 +171,17 @@ class _QuestionsState extends State<Questions>
                 );
               } else if (snapshot.hasData) {
                 var questionData = jsonDecode(snapshot.data.toString());
-                BusinessLogicClass().getTheQuestionsRequested(
-                    questionData: questionData, year: year);
 
-                //TODO: FOR REVIEW; A FUTURE IMPLEMENTATION
-                // if (BusinessLogicClass()
-                //         .getTheQuestionsRequested(
-                //             questionData: questionData, year: year)
-                //         .length <
-                //     1) {
-                //   return Center(
-                //     child: Text("No questions to review"),
-                //   );
-                // }
-                // print(_questionControllerInstance.subjectedSelected.value);
+                var questionsRequested = BusinessLogicClass()
+                    .getTheQuestionsRequested(
+                        questionData: questionData, year: year);
 
                 return Container(
                   child: ListView.builder(
                     addAutomaticKeepAlives: true,
                     addRepaintBoundaries: true,
-                    itemCount: BusinessLogicClass()
-                        .getTheQuestionsRequested(
-                            questionData: questionData, year: year)
-                        .length,
-                    itemBuilder: (context, index) => BusinessLogicClass()
-                        .getTheQuestionsRequested(
-                            questionData: questionData, year: year)[index],
+                    itemCount: questionsRequested.length,
+                    itemBuilder: (context, index) => questionsRequested[index],
                   ),
                 );
               }

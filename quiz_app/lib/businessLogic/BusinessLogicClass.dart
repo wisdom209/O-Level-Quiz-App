@@ -9,22 +9,6 @@ import 'package:http/http.dart' as http;
 import 'package:quiz_app/Models/questionModel.dart';
 
 class BusinessLogicClass {
-  // void getProgressData() {
-  //   var subjectList = [
-  //     'government',
-  //     'mathematics',
-  //     'biology',
-  //     'physics',
-  //     'chemistry',
-  //     'literature-in-english',
-  //     'crs'
-  //   ];
-
-  //   for (var i = 0; i < subjectList.length; i++) {
-  //     CollectionService().readProgress(subject: "${subjectList[i]}");
-  //   }
-  // }
-
   Future getData() async {
     QuestionController _questionControllerinstance = Get.find();
     String subject = _questionControllerinstance.subjectedSelected.value;
@@ -57,6 +41,7 @@ class BusinessLogicClass {
           int yearInt = int.parse(randYear) + Random().nextInt(10) + 1;
           randYear = "$yearInt";
         }
+
         QuestionModel questionModel =
             QuestionModel(index: i, questionData: questionData, year: randYear);
         questionModel.initializeData();
@@ -75,25 +60,7 @@ class BusinessLogicClass {
                 : ""));
       }
     } else if (_questionControllerInstance.isReview.value) {
-      listOfQuestions = _questionControllerInstance.possibleReviewQuestions;
-      //TODO
-      // var answerMap = _questionControllerInstance.answerSheet;
-      // var resultEntries = _questionControllerInstance.resultSheet;
-      // var answerLength = answerMap.length;
-
-      // if (answerLength > 0 &&
-      //     (resultEntries.values.contains("a") ||
-      //         resultEntries.values.contains("b") ||
-      //         resultEntries.values.contains("c") ||
-      //         resultEntries.values.contains("d") ||
-      //         resultEntries.values.contains("e"))) {
-      //   answerMap.forEach((k, v) {
-      //     if (v != "correct") {
-      //       listOfQuestions.add(
-      //           _questionControllerInstance.possibleReviewQuestions[k - 1]);
-      //     }
-      //   });
-      // }
+      return _questionControllerInstance.possibleReviewQuestions;
     } else {
       for (var i = 0; i < 50; i++) {
         QuestionModel questionModel =
@@ -115,7 +82,13 @@ class BusinessLogicClass {
       }
     }
     _questionControllerInstance.possibleReviewQuestions = listOfQuestions;
-    return listOfQuestions;
+    if (_questionControllerInstance.possibleReviewQuestions ==
+        listOfQuestions) {
+      return listOfQuestions;
+    } else {
+      return null;
+    }
+    
   }
 
   dynamic calculateScore() {

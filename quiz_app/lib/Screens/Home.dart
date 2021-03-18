@@ -22,8 +22,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     HiveManipulation().init();
-    HiveManipulation().register();
-
+    HiveManipulation().register();   
     Timer(Duration(seconds: 3), () {
       Get.offAll(SelectUser());
     });

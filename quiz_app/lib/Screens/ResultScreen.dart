@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:quiz_app/GetController/QuestionController.dart';
 
 import '../Constants/AppConstants.dart';
 import '../businessLogic/BusinessLogicClass.dart';
 import 'Dashboard.dart';
+import 'Questions.dart';
 
 class ResultScreen extends StatelessWidget {
   //const ResultScreen({Key key}) : super(key: key);
+  final QuestionController _questionControllerInstance = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +87,19 @@ class ResultScreen extends StatelessWidget {
                       ),
 
                       //TODO: Review the Questions like a study
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: FlatButton(
-                      //     onPressed: () {
-                      //       _questionControllerInstance.isExam.value = false;
-                      //       _questionControllerInstance.isReview.value = true;
-                      //       Get.offAll(Questions());
-                      //     },
-                      //     child: Text("Review Questions"),
-                      //     color: Colors.white,
-                      //   ),
-                      //)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FlatButton(
+                          onPressed: () {
+                            _questionControllerInstance.isExam.value = false;
+                            
+                            _questionControllerInstance.isReview.value = true;
+                            Get.offAll(Questions());
+                          },
+                          child: Text("Review Questions"),
+                          color: Colors.white,
+                        ),
+                      )
                     ],
                   ),
                 ),

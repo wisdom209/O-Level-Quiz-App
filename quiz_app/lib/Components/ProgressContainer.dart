@@ -90,7 +90,7 @@ class _ProgressContainerState extends State<ProgressContainer> {
                                 "Exam Mode",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.italic,
+                                    fontStyle: FontStyle.normal,
                                     fontSize: 25),
                               )),
                         ),
